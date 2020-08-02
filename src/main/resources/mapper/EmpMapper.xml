@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jiyun.mapper.EmpMapper">
+    <resultMap id="queryAll" type="emp">
+        <id column="eid" property="eid"></id>
+        <result column="ename" property="ename"></result>
+        <result column="salary" property="salary"></result>
+        <result column="job" property="job"></result>
+        <result column="birthday" property="birthday"></result>
+        <result column="photo" property="photo"></result>
+        <association property="dept" javaType="dept">
+            <id column="did" property="did"></id>
+            <result column="dname" property="dname"></result>
+            <result column="location" property="location"></result>
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="queryAll">
+        select * from emp e left join dept d on e.did = d.did
+    </select>
+    <insert id="addEmp" parameterType="emp">
+        insert into emp values(null,#{emp.ename},#{emp.salary},
+        #{emp.job},#{emp.birthday},#{emp.photo},#{emp.did})
+    </insert>
+    <delete id="delEmpById" parameterType="int">
+        delete from emp where eid = #{eid}
+    </delete>
+    <select id="findEmpById" parameterType="int" resultType="emp">
+        select *from emp where eid=#{eid}
+    </select>
+    <update id="update" parameterType="emp">
+        update emp set ename=#{emp.ename},salary=#{emp.salary},
+        job=#{emp.job},birthday={emp.birthday},photo=#{emp.photo},did=#{emp.did} where eid=#{emp.eid}
+    </update>
+</mapper>

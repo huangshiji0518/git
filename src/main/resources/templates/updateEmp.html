@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            text-align: center;
+            color:black;
+        }
+        span{
+           font-size: 14px;
+        }
+        table{
+            border-collapse: collapse;
+            width: 80%;
+        }
+        table,td,th {
+
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <span>修改员工</span>
+    <form th:action="@{/emp/updateEmp}" th:object="${emp}" method="post" enctype="multipart/form-data">
+        <table align="center">
+            <input th:type="hidden" name="eid" value="${empById.eid}">
+            <tr>
+                <td>姓名：</td>
+                <td>
+                    <input th:type="text" name="ename" value="${empById.ename}">
+                </td>
+            </tr>
+            <tr>
+                <td>薪资：</td>
+                <td>
+                    <input th:type="number" name="salary" value="${empById.salary}">
+                </td>
+            </tr>
+            <tr>
+                <td>职位：</td>
+                <td>
+                    <input th:type="text" name="job" value="${empById.job}">
+                </td>
+            </tr>
+            <tr>
+                <td>生日：</td>
+                <td>
+                    <input th:type="date" name="birthday">
+                </td>
+            </tr>
+            <tr>
+                <td>图片：</td>
+                <td>
+                    <input th:type="file" name="file">
+                </td>
+            </tr>
+            <tr>
+                <td>部门：</td>
+                <td>
+                    <select name="did">
+                        <option>--请选择部门--</option>
+                        <option th:each="dept:${depts}" th:text="${dept.dname}" th:value="${dept.did}"></option>
+                    </select>
+            </tr>
+        </table>
+        <input th:type="submit" value="修改">
+    </form>
+</body>
+</html>

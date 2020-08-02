@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            text-align: center;
+            color:darkblue;
+        }
+        span{
+            font-size:14px;
+        }
+        table{
+            border-collapse: collapse;
+            width: 80%;
+        }
+        table,td,th{
+            border:1px solid darkmagenta;
+        }
+    </style>
+</head>
+<body>
+    <span>员工信息</span>
+<table align="center">
+    <tr>
+        <td>姓名</td>
+        <th>薪资</th>
+        <th>职位</th>
+        <th>生日</th>
+        <th>照片</th>
+        <th>所在部门</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="emp:${emps}">
+        <td th:text="${emp.ename}"></td>
+        <td th:text="${emp.salary}"></td>
+        <td th:text="${emp.job}"></td>
+        <td th:text="${emp.birthday}"></td>
+        <td>
+            <img th:src="@{${emp.photo}}" width="80" height="80">
+         </td>
+        <td th:text="${emp.dept.dname}"></td>
+        <td>
+            <a th:href="${'/emp/delEmpById?eid='+emp.eid}">删除</a>
+            <a th:href="${'/emp/findEmpById?eid='+emp.eid}">修改</a>
+        </td>
+
+    </tr>
+</table>
+    <a th:href="${'/emp/toAddEmp'}"> 添加</a>
+</body>
+</html>
