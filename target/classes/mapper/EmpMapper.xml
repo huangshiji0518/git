@@ -29,6 +29,6 @@
     </select>
     <update id="update" parameterType="emp">
         update emp set ename=#{emp.ename},salary=#{emp.salary},
-        job=#{emp.job},birthday={emp.birthday},photo=#{emp.photo},did=#{emp.did} where eid=#{emp.eid}
+        job=#{emp.job},birthday=#{emp.birthday},photo=#{emp.photo},did=#{emp.did} where eid=#{emp.eid}
     </update>
 </mapper>
